@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Couleurs du site : modifiez ici, le mode sombre est juste en dessous. */
+:root {
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --ink: #0b1730;
+  --muted: #4b5b78;
+  --line: #d6dfee;
+  --brand: #1456c9;
+  --brand-ink: #ffffff;
+  --ok: #0f7b4a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #060d1f;
+    --surface: #0d1a38;
+    --ink: #e8f0ff;
+    --muted: #9eb1d6;
+    --line: #1e315f;
+    --brand: #5a94ff;
+    --brand-ink: #06122c;
+    --ok: #4ad394;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-ok: var(--ok);
+  /* Identité fixe (bandes marine, jaune des affiches) */
+  --color-navy: #07122e;
+  --color-on-navy: #eaf1ff;
+  --color-on-navy-muted: #a9bde3;
+  --color-cyan: #4cc9ff;
+  --color-sun: #ffd60a;
+  --color-sun-ink: #0b1730;
+
+  --font-display: var(--font-bricolage), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Animation d'apparition au défilement, en CSS pur.
+   Sans prise en charge du navigateur, le contenu reste simplement visible. */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes charge {
+  from { transform: scaleX(0.12); }
+  to { transform: scaleX(1); }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+.battery-fill {
+  transform-origin: left center;
+  animation: charge 2.6s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .battery-fill { animation: none; }
+}

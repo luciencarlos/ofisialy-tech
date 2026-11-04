@@ -1,0 +1,100 @@
+# Administration du site (Decap CMS).
+# Les articles saisis ici sont enregistrés comme fichiers dans le dépôt GitHub,
+# puis le site se reconstruit tout seul.
+
+backend:
+  name: github
+  repo: VOTRE-COMPTE-GITHUB/ofisialy-tech   # À REMPLACER : compte GitHub / nom du dépôt
+  branch: main
+
+# Actif seulement sur votre ordinateur (npm run cms), jamais en ligne.
+local_backend: true
+
+locale: fr
+site_url: https://VOTRE-SITE.netlify.app      # À REMPLACER après la mise en ligne
+display_url: https://VOTRE-SITE.netlify.app
+
+# Les photos sont envoyées dans ce dossier. Une version légère est créée
+# automatiquement à chaque publication (scripts/optimize-images.mjs).
+media_folder: content/uploads
+public_folder: /uploads
+
+collections:
+  - name: accessoires
+    label: Accessoires disponibles
+    label_singular: Accessoire
+    description: Les articles affichés dans la section « Disponibles maintenant ».
+    folder: content/accessoires
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} · {{availability}}"
+    sortable_fields: [date, title]
+    view_filters:
+      - label: En stock
+        field: availability
+        pattern: en-stock
+      - label: Sur commande
+        field: availability
+        pattern: sur-commande
+      - label: Épuisés
+        field: availability
+        pattern: epuise
+    fields:
+      - label: Nom de l'article
+        name: title
+        widget: string
+        hint: "Exemple : Batterie Dell Latitude 5490"
+      - label: Catégorie
+        name: category
+        widget: select
+        options:
+          - { label: Batterie, value: batterie }
+          - { label: Clavier, value: clavier }
+          - { label: Rack pour disque, value: rack }
+          - { label: Disque dur / SSD / NVMe, value: disque }
+          - { label: Autre, value: autre }
+      - label: Photo
+        name: photo
+        widget: image
+        media_library:
+          config:
+            max_file_size: 8388608
+        hint: "Photo de l'article seul, sur fond clair et uni, en bonne lumière. 8 Mo maximum."
+      - label: Disponibilité
+        name: availability
+        widget: select
+        default: en-stock
+        options:
+          - { label: En stock, value: en-stock }
+          - { label: Sur commande, value: sur-commande }
+          - { label: Épuisé, value: epuise }
+      - label: Prix (en Ariary)
+        name: price
+        widget: number
+        value_type: int
+        min: 0
+        required: false
+        hint: "Laissez vide pour ne pas afficher de prix."
+      - label: Marque ou modèles compatibles
+        name: compatible
+        widget: string
+        required: false
+        hint: "Exemple : Dell Latitude 5480, 5490, 5580"
+      - label: Description
+        name: description
+        widget: text
+        required: false
+        hint: "Capacité, état, garantie, ce que vous voulez préciser."
+      - label: Afficher sur le site
+        name: published
+        widget: boolean
+        default: true
+      - label: Date d'ajout
+        name: date
+        widget: datetime
+        default: "{{now}}"
+        date_format: DD/MM/YYYY
+        time_format: false
+        format: YYYY-MM-DD
