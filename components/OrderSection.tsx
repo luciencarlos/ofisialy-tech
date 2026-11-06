@@ -16,7 +16,7 @@ export function OrderSection() {
           tone="navy"
           eyebrow="Passer commande"
           title="Préparez votre demande en 30 secondes"
-          text="Remplissez les champs, copiez le message, puis envoyez-le-nous. Nous répondons avec la disponibilité et le prix."
+          text="Remplissez les champs, puis envoyez votre demande sur Messenger ou WhatsApp. Nous répondons avec la disponibilité et le prix."
         />
         <div className="grid items-start gap-10 md:grid-cols-[.8fr_1.2fr]">
           <ol className="grid gap-[22px]">

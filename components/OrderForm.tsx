@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { siteConfig } from "@/config/site";
 import { defaultOptionId, getOption, orderOptions } from "@/data/order-options";
 import type { OrderField } from "@/data/types";
-import { PREFILL_EVENT, buildMessage, whatsappUrl, type OrderValues, type PrefillDetail } from "@/lib/order";
+import { PREFILL_EVENT, buildMessage, messengerUrl, whatsappUrl, type OrderValues, type PrefillDetail } from "@/lib/order";
 import { Button } from "./ui/Button";
+import { MessengerIcon, WhatsAppIcon } from "./ui/Icons";
 
 const field =
   "min-h-[46px] w-full rounded-lg border-[1.5px] border-line bg-bg px-3 py-2.5 text-base text-ink focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/30";
@@ -51,7 +51,7 @@ export function OrderForm() {
   const option = getOption(values.optionId);
   const message = buildMessage(values);
   const wa = whatsappUrl(message);
-  const { messenger } = siteConfig.contact;
+  const fb = messengerUrl(message);
 
   const set = (key: TextKey) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setValues((v) => ({ ...v, [key]: e.target.value }));
@@ -63,11 +63,29 @@ export function OrderForm() {
     ] as { key: "primary" | "secondary"; id: string; def: OrderField | null }[]
   ).filter((d): d is { key: "primary" | "secondary"; id: string; def: OrderField } => d.def !== null);
 
-  async function copy() {
+  /** Copie le message. Sert de secours si Messenger n'affiche pas le texte pré-rempli. */
+  async function copyMessage(): Promise<boolean> {
     try {
       await navigator.clipboard.writeText(message);
-      setStatus("Message copié. Collez-le dans votre conversation.");
+      return true;
     } catch {
+      return false;
+    }
+  }
+
+  async function onMessenger() {
+    const copied = await copyMessage();
+    setStatus(
+      copied
+        ? "Messenger s'ouvre. Si votre message n'apparaît pas, collez-le (appui long, puis Coller) et envoyez."
+        : "Messenger s'ouvre. Si votre message n'apparaît pas, copiez le texte de l'aperçu ci-dessus et collez-le.",
+    );
+  }
+
+  async function onCopyOnly() {
+    if (await copyMessage()) {
+      setStatus("Message copié. Collez-le dans votre conversation.");
+    } else {
       outRef.current?.focus();
       outRef.current?.select();
       setStatus("Message sélectionné. Copiez-le avec Ctrl+C ou en appui long.");
@@ -139,7 +157,7 @@ export function OrderForm() {
       ) : null}
 
       <div className="grid gap-2">
-        <label htmlFor="f-out" className="font-mono text-xs uppercase tracking-[.08em] text-muted">Votre message</label>
+        <label htmlFor="f-out" className="font-mono text-xs uppercase tracking-[.08em] text-muted">Aperçu de votre message</label>
         <textarea
           id="f-out"
           ref={outRef}
@@ -149,14 +167,28 @@ export function OrderForm() {
         />
       </div>
 
-      <div className="flex flex-wrap gap-2.5">
-        <Button variant="solid" onClick={copy}>Copier le message</Button>
-        {wa ? <Button variant="line" href={wa} external>Ouvrir WhatsApp</Button> : null}
-        {messenger ? <Button variant="line" href={messenger} external>Ouvrir Messenger</Button> : null}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {fb ? (
+          <Button variant="messenger" href={fb} external onClick={onMessenger} size="lg">
+            <MessengerIcon />
+            Envoyer sur Messenger
+          </Button>
+        ) : null}
+        {wa ? (
+          <Button variant="whatsapp" href={wa} external size="lg">
+            <WhatsAppIcon />
+            Envoyer sur WhatsApp
+          </Button>
+        ) : null}
+        {!fb && !wa ? (
+          <Button variant="solid" onClick={onCopyOnly} size="lg" className="sm:col-span-2">
+            Copier le message
+          </Button>
+        ) : null}
       </div>
       <div role="status" aria-live="polite" className="min-h-[22px] text-sm font-bold text-ok">{status}</div>
       <p className="text-sm text-muted">
-        Collez le message dans une conversation avec Ofisialy Tech sur Facebook ou par téléphone.
+        Un clic ouvre la conversation avec Ofisialy Tech, votre message est déjà prêt. Il ne reste qu&apos;à appuyer sur Envoyer.
       </p>
     </form>
   );
