@@ -39,10 +39,17 @@ export type ProductImage = {
   height: number;
 };
 
+/** Disponibilité d'un modèle : "en-stock", "sur-commande" ou "epuise". */
+export type SpecAvailability = "en-stock" | "sur-commande" | "epuise";
+
 export type ProductSpec = {
   label: string;
   title: string;
   detail: string;
+  /** Disponibilité affichée sur la carte du modèle. Absent = aucune étiquette. */
+  availability?: SpecAvailability;
+  /** Précision facultative affichée à côté de l'étiquette (ex : « délai 3 jours »). */
+  availabilityNote?: string;
 };
 
 export type Product = {

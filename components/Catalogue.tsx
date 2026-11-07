@@ -1,19 +1,41 @@
 import Image from "next/image";
 import { products } from "@/data/products";
 import { brands } from "@/data/brands";
-import type { Product } from "@/data/types";
+import type { Product, SpecAvailability } from "@/data/types";
 import { Container } from "./ui/Container";
 import { SectionHead } from "./ui/SectionHead";
 import { PickButton } from "./ui/PickButton";
+
+const availabilityLabel: Record<SpecAvailability, string> = {
+  "en-stock": "En stock",
+  "sur-commande": "Sur commande",
+  epuise: "Épuisé",
+};
+
+const availabilityStyle: Record<SpecAvailability, string> = {
+  "en-stock": "border-ok text-ok",
+  "sur-commande": "border-line text-muted",
+  epuise: "border-transparent bg-line text-muted",
+};
 
 function SpecGrid({ specs, cols }: { specs: NonNullable<Product["specs"]>; cols: string }) {
   return (
     <div className={`grid gap-3 ${cols}`}>
       {specs.map((s) => (
-        <div key={s.label} className="grid min-w-0 gap-0.5 rounded-[10px] border border-line px-3.5 py-3">
+        <div key={s.label} className="grid min-w-0 content-start gap-0.5 rounded-[10px] border border-line px-3.5 py-3">
           <span className="font-mono text-xs uppercase tracking-[.08em] text-brand">{s.label}</span>
           <b className="font-display text-xl">{s.title}</b>
           <span className="text-sm text-muted">{s.detail}</span>
+          {s.availability ? (
+            <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span
+                className={`rounded-md border px-2 py-0.5 font-mono text-[12px] font-bold ${availabilityStyle[s.availability]}`}
+              >
+                {availabilityLabel[s.availability]}
+              </span>
+              {s.availabilityNote ? <span className="text-sm text-muted">{s.availabilityNote}</span> : null}
+            </span>
+          ) : null}
         </div>
       ))}
     </div>

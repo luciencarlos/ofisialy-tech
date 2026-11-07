@@ -45,8 +45,9 @@ export const products: Product[] = [
       height: 275,
     },
     specs: [
-      { label: "Rack 3.0", title: "USB 3.0", detail: "jusqu'à 5 Gbps" },
-      { label: "Rack 3.1", title: "USB Type-C", detail: "jusqu'à 10 Gbps" },
+      // Disponibilité : "en-stock", "sur-commande" ou "epuise". Ajoutez availabilityNote: "…" pour un délai.
+      { label: "Rack 3.0", title: "USB 3.0", detail: "jusqu'à 5 Gbps", availability: "sur-commande" },
+      { label: "Rack 3.1", title: "USB Type-C", detail: "jusqu'à 10 Gbps", availability: "sur-commande" },
     ],
     cta: { label: "Commander un rack", optionId: "rack-30", variant: "line" },
   },
@@ -57,9 +58,9 @@ export const products: Product[] = [
       "Pour remplacer un disque lent, agrandir le stockage ou réinstaller un système sur une base neuve.",
     layout: "row",
     specs: [
-      { label: "HDD", title: "Disque dur", detail: "2.5″, grande capacité" },
-      { label: "SSD", title: "SSD SATA", detail: "2.5″, démarrage rapide" },
-      { label: "NVMe", title: "SSD NVMe", detail: "M.2, pour les PC compatibles" },
+      { label: "HDD", title: "Disque dur", detail: "2.5″, grande capacité", availability: "sur-commande" },
+      { label: "SSD", title: "SSD SATA", detail: "2.5″, démarrage rapide", availability: "sur-commande" },
+      { label: "NVMe", title: "SSD NVMe", detail: "M.2, pour les PC compatibles", availability: "sur-commande" },
     ],
     cta: { label: "Demander un disque", optionId: "disque-ssd", variant: "line" },
   },
