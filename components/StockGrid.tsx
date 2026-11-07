@@ -42,15 +42,15 @@ function StockCard({ item }: { item: StockItem }) {
           </div>
         )}
         <span
-          className={`absolute left-3 top-3 rounded-md border bg-surface px-2.5 py-1 font-mono text-[12.5px] font-bold ${availabilityStyle[item.availability]}`}
+          className={`absolute left-3 top-3 rounded-md border bg-surface px-2.5 py-1 font-mono text-xs font-bold ${availabilityStyle[item.availability]}`}
         >
           {availabilityLabel[item.availability]}
         </span>
       </div>
       <div className="flex min-w-0 flex-1 flex-col items-start gap-2.5 p-4 sm:p-5">
-        <h3 className="text-xl font-bold">{item.title}</h3>
-        {item.compatible ? <p className="font-mono text-[13px] text-muted">{item.compatible}</p> : null}
-        {item.description ? <p className="text-[15.5px] text-muted">{item.description}</p> : null}
+        <h3 className="card-title">{item.title}</h3>
+        {item.compatible ? <p className="font-mono text-sm text-muted">{item.compatible}</p> : null}
+        {item.description ? <p className="text-muted">{item.description}</p> : null}
         {item.price ? (
           <p className="font-display text-2xl font-extrabold">
             {priceFormat.format(item.price)} <span className="text-base font-bold text-muted">Ar</span>
@@ -85,7 +85,7 @@ export function StockGrid({ items }: { items: StockItem[] }) {
               type="button"
               aria-pressed={filter === c.id}
               onClick={() => setFilter(c.id)}
-              className={`min-h-10 cursor-pointer rounded-full border-2 px-4 text-[15px] font-bold transition ${
+              className={`min-h-11 cursor-pointer rounded-full border-2 px-4 text-base font-bold transition ${
                 filter === c.id ? "border-brand bg-brand text-brand-ink" : "border-line text-ink hover:border-brand"
               }`}
             >

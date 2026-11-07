@@ -2,7 +2,7 @@ import Image from "next/image";
 import { products } from "@/data/products";
 import { brands } from "@/data/brands";
 import type { Product, SpecAvailability } from "@/data/types";
-import { Container } from "./ui/Container";
+import { Section } from "./ui/Section";
 import { SectionHead } from "./ui/SectionHead";
 import { PickButton } from "./ui/PickButton";
 
@@ -29,7 +29,7 @@ function SpecGrid({ specs, cols }: { specs: NonNullable<Product["specs"]>; cols:
           {s.availability ? (
             <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span
-                className={`rounded-md border px-2 py-0.5 font-mono text-[12px] font-bold ${availabilityStyle[s.availability]}`}
+                className={`rounded-md border px-2 py-0.5 font-mono text-xs font-bold ${availabilityStyle[s.availability]}`}
               >
                 {availabilityLabel[s.availability]}
               </span>
@@ -48,7 +48,7 @@ function Tags({ items, highlight }: { items: string[]; highlight?: boolean }) {
       {items.map((t) => (
         <li
           key={t}
-          className={`rounded-md border px-2.5 py-1 font-mono text-[12.5px] font-medium ${
+          className={`rounded-md border px-2.5 py-1 font-mono text-xs font-medium ${
             highlight ? "border-transparent bg-sun text-sun-ink" : "border-line"
           }`}
         >
@@ -63,6 +63,7 @@ function ProductCard({ p }: { p: Product }) {
   const wrapper =
     "reveal group grid min-w-0 overflow-hidden rounded-2xl border border-line bg-surface " +
     (p.layout === "feature" ? "md:col-span-2 md:grid-cols-[1.1fr_1fr]" : "") +
+    (p.layout === "card" ? "grid-rows-[auto_1fr]" : "") +
     (p.layout === "row" ? "md:col-span-2" : "");
 
   const photo = p.image ? (
@@ -83,7 +84,7 @@ function ProductCard({ p }: { p: Product }) {
       <article className={wrapper}>
         <div className="grid items-center gap-7 p-5 sm:p-6 md:grid-cols-[1fr_1.3fr]">
           <div className="grid justify-items-start gap-3.5">
-            <h3 className="text-[26px] font-bold">{p.title}</h3>
+            <h3 className="card-title">{p.title}</h3>
             <p className="text-muted">{p.description}</p>
             <PickButton optionId={p.cta.optionId} variant={p.cta.variant}>{p.cta.label}</PickButton>
           </div>
@@ -96,8 +97,8 @@ function ProductCard({ p }: { p: Product }) {
   return (
     <article className={wrapper}>
       {photo}
-      <div className="grid min-w-0 content-start justify-items-start gap-3.5 p-5 sm:p-[26px]">
-        <h3 className="text-[26px] font-bold">{p.title}</h3>
+      <div className="flex min-w-0 flex-col items-start gap-3.5 p-5 sm:p-6">
+        <h3 className="card-title">{p.title}</h3>
         <p className="text-muted">{p.description}</p>
         {p.tags ? <Tags {...p.tags} /> : null}
         {p.extra ? <p className="text-muted">{p.extra}</p> : null}
@@ -106,7 +107,9 @@ function ProductCard({ p }: { p: Product }) {
             <SpecGrid specs={p.specs} cols="sm:grid-cols-2" />
           </div>
         ) : null}
-        <PickButton optionId={p.cta.optionId} variant={p.cta.variant}>{p.cta.label}</PickButton>
+        <div className="mt-auto w-full pt-1 sm:w-auto">
+          <PickButton optionId={p.cta.optionId} variant={p.cta.variant}>{p.cta.label}</PickButton>
+        </div>
       </div>
     </article>
   );
@@ -114,8 +117,7 @@ function ProductCard({ p }: { p: Product }) {
 
 export function Catalogue() {
   return (
-    <section id="produits" className="py-14 md:py-[72px]">
-      <Container>
+    <Section id="produits">
         <SectionHead
           eyebrow="Accessoires informatiques"
           title="Les pièces que nous commandons pour vous"
@@ -129,12 +131,11 @@ export function Catalogue() {
         <div aria-label="Marques compatibles" className="mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-2">
           <span className="mr-1.5 font-mono text-xs uppercase tracking-[.08em] text-muted">Compatible avec</span>
           {brands.map((b) => (
-            <span key={b} className="rounded-full border border-line bg-surface px-3 py-1 font-display text-[17px] font-bold">
+            <span key={b} className="rounded-full border border-line bg-surface px-3 py-1 font-display text-lg font-bold">
               {b}
             </span>
           ))}
         </div>
-      </Container>
-    </section>
+    </Section>
   );
 }

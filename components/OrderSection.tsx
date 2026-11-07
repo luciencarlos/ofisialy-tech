@@ -1,4 +1,4 @@
-import { Container } from "./ui/Container";
+import { Section } from "./ui/Section";
 import { SectionHead } from "./ui/SectionHead";
 import { OrderForm } from "./OrderForm";
 
@@ -10,8 +10,7 @@ const steps = [
 
 export function OrderSection() {
   return (
-    <section id="commande" className="bg-navy py-14 text-on-navy md:py-[72px]">
-      <Container>
+    <Section id="commande" tone="navy">
         <SectionHead
           tone="navy"
           eyebrow="Passer commande"
@@ -26,15 +25,14 @@ export function OrderSection() {
                   {i + 1}
                 </span>
                 <div>
-                  <b className="block font-display text-[19px]">{s.title}</b>
-                  <span className="text-[15.5px] text-on-navy-muted">{s.text}</span>
+                  <b className="card-title block">{s.title}</b>
+                  <span className="text-on-navy-muted">{s.text}</span>
                 </div>
               </li>
             ))}
           </ol>
           <OrderForm />
         </div>
-      </Container>
-    </section>
+    </Section>
   );
 }

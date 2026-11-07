@@ -14,7 +14,7 @@ export function SectionHead({ eyebrow, title, text, tone = "light" }: Props) {
       </span>
       <h2 className="text-[clamp(28px,4vw,42px)] font-extrabold tracking-[-.015em]">{title}</h2>
       {text ? (
-        <p className={`text-[17px] ${navy ? "text-on-navy-muted" : "text-muted"}`}>{text}</p>
+        <p className={`text-lg ${navy ? "text-on-navy-muted" : "text-muted"}`}>{text}</p>
       ) : null}
     </div>
   );

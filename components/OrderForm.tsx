@@ -18,7 +18,7 @@ import { Button } from "./ui/Button";
 import { MessengerIcon, WhatsAppIcon } from "./ui/Icons";
 
 const field =
-  "min-h-[46px] w-full rounded-lg border-[1.5px] border-line bg-bg px-3 py-2.5 text-base text-ink focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/30";
+  "min-h-[46px] w-full rounded-[10px] border-[1.5px] border-line bg-bg px-3 py-2.5 text-base text-ink focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/30";
 
 /** Rouge des champs obligatoires : plus clair en mode sombre pour rester lisible. */
 const redText = "text-[#c62828] dark:text-[#ff7b7b]";
@@ -111,7 +111,7 @@ function DetailField({ id, def, value, onChange, error, wide, numeric }: DetailF
         ) : null}
       </div>
       {def.help ? (
-        <p id={`${id}-help`} className="text-[13.5px] text-muted">
+        <p id={`${id}-help`} className="text-sm text-muted">
           {def.help}
         </p>
       ) : null}
@@ -205,7 +205,7 @@ export function OrderForm() {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="grid gap-4 rounded-2xl bg-surface p-5 text-ink sm:p-6">
+    <form onSubmit={(e) => e.preventDefault()} className="on-light grid gap-4 rounded-2xl bg-surface p-5 text-ink sm:p-6">
       <div className="grid gap-3.5 sm:grid-cols-2">
         <div className="grid min-w-0 gap-1.5 sm:col-span-2">
           <label htmlFor="f-type" className="text-sm font-bold">Ce que vous cherchez</label>
@@ -280,7 +280,7 @@ export function OrderForm() {
       ) : null}
 
       {option.notice ? (
-        <p role="note" className="rounded-lg border border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
+        <p role="note" className="rounded-[10px] border border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
           {option.notice}
         </p>
       ) : null}
@@ -292,7 +292,7 @@ export function OrderForm() {
           ref={outRef}
           readOnly
           value={message}
-          className="min-h-[140px] w-full resize-y rounded-lg border-[1.5px] border-dashed border-line bg-bg p-3 font-mono text-[13.5px] leading-[1.55] text-ink"
+          className="min-h-[140px] w-full resize-y rounded-[10px] border-[1.5px] border-dashed border-line bg-bg p-3 font-mono text-sm leading-[1.55] text-ink"
         />
       </div>
 
@@ -321,7 +321,7 @@ export function OrderForm() {
         </p>
       ) : null}
       {process.env.NODE_ENV === "development" && !fb ? (
-        <p className="rounded-lg border border-dashed border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
+        <p className="rounded-[10px] border border-dashed border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
           Mode développement : le bouton Messenger apparaît dès que <code className="font-mono">messenger</code> ou{" "}
           <code className="font-mono">facebook</code> est rempli dans <code className="font-mono">config/site.ts</code>.
         </p>

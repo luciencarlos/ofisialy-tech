@@ -93,7 +93,7 @@ export function SocialLinks() {
               </span>
               <span
                 aria-hidden="true"
-                className={`pointer-events-none absolute bottom-full left-1/2 z-10 mb-2.5 -translate-x-1/2 whitespace-nowrap rounded-md px-2.5 py-1 text-[13px] font-bold opacity-0 shadow-lg transition duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 ${l.tip}`}
+                className={`pointer-events-none absolute bottom-full left-1/2 z-10 mb-2.5 -translate-x-1/2 whitespace-nowrap rounded-md px-2.5 py-1 text-sm font-bold opacity-0 shadow-lg transition duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 ${l.tip}`}
               >
                 {l.label}
               </span>

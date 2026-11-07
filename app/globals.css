@@ -51,6 +51,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Les ancres ne passent pas sous l'en-tête fixe */
+    scroll-padding-top: 76px;
   }
   body {
     background: var(--bg);
@@ -63,10 +65,26 @@
     line-height: 1.1;
     text-wrap: balance;
   }
+  /* Contour de focus visible au clavier : bleu de la marque sur fond clair, cyan sur fond marine. */
   :focus-visible {
-    outline: 3px solid var(--color-cyan);
+    outline: 3px solid var(--brand);
     outline-offset: 2px;
     border-radius: 4px;
+  }
+  .on-navy :focus-visible {
+    outline-color: var(--color-cyan);
+  }
+  .on-navy .on-light :focus-visible {
+    outline-color: var(--brand);
+  }
+}
+
+/* Titre commun à toutes les cartes et blocs de la page. */
+@layer components {
+  .card-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.15;
   }
 }
 
