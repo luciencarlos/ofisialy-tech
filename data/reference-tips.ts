@@ -4,9 +4,13 @@ export const referenceTips: ReferenceTip[] = [
   {
     title: "Batterie",
     parts: [
-      "Lisez l'étiquette de la batterie si elle se retire, par exemple ",
+      "Repérez la capacité en ",
+      { code: "Wh" },
+      " sur l'étiquette de l'ancienne batterie, par exemple ",
       { code: "42 Wh" },
-      ". Sinon, relevez le modèle du PC.",
+      ". Batterie interne ? Sous Windows, tapez ",
+      { code: "powercfg /batteryreport" },
+      " dans l'invite de commandes, puis ouvrez le fichier indiqué : la « Design capacity » est en mWh (42 000 mWh = 42 Wh).",
     ],
   },
   {

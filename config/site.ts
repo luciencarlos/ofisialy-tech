@@ -9,8 +9,7 @@ export const siteConfig = {
   contact: {
     phoneDisplay: "038 27 307 10",
     whatsapp: "261378719383",
-    messenger: "",
-    /** Lien de la page Facebook, ex : "https://www.facebook.com/votrepage" */
-    facebook: "",
+    messenger: "https://m.me/techofisialy",
+    facebook: "https://www.facebook.com/techofisialy",
   },
 } as const;

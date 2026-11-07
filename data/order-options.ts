@@ -16,10 +16,21 @@ const pcBrandModel: OrderField = {
   placeholder: "Dell Latitude 5490, HP Pavilion 15…",
 };
 
+/** Capacité d'une batterie : obligatoire, car c'est ce qui permet de choisir la bonne pièce. */
+const batteryCapacity: OrderField = {
+  label: "Capacité de la batterie",
+  placeholder: "42",
+  unit: "Wh",
+  required: true,
+  max: 300,
+  errorMessage: "Indiquez la capacité en Wh (par exemple 42) pour envoyer votre demande.",
+  help: "Indiquée sur l'étiquette de l'ancienne batterie. Si vous ne voyez que des V et des mAh : Wh = V × mAh ÷ 1000 (11,1 V et 4400 mAh donnent 48,8 Wh).",
+};
+
 const SECURITY_NOTICE =
   "Pour votre sécurité, n'écrivez jamais de mot de passe, de code reçu par SMS ou de numéro de carte dans ce message.";
 
-export const orderOptions: OrderOption[] = [
+const baseOptions: OrderOption[] = [
   // ---- Pièces ----
   {
     id: "batterie-interne",
@@ -27,9 +38,10 @@ export const orderOptions: OrderOption[] = [
     kind: "piece",
     primary: pcBrand,
     secondary: pcModel,
+    measure: batteryCapacity,
     note: {
       label: "Précisions",
-      placeholder: "Capacité ou référence de l'ancienne batterie (ex : 42 Wh), problème constaté, délai souhaité…",
+      placeholder: "Référence de l'ancienne batterie si vous la connaissez, problème constaté, délai souhaité…",
     },
   },
   {
@@ -38,6 +50,7 @@ export const orderOptions: OrderOption[] = [
     kind: "piece",
     primary: pcBrand,
     secondary: pcModel,
+    measure: batteryCapacity,
     note: {
       label: "Précisions",
       placeholder: "Référence imprimée sur l'ancienne batterie, nombre de cellules (6 ou 9), délai souhaité…",
@@ -212,9 +225,28 @@ export const orderOptions: OrderOption[] = [
     kind: "service",
     primary: null,
     secondary: null,
-    note: { label: "Votre demande", placeholder: "Décrivez ce dont vous avez besoin : pièce, service, modèle de PC…" },
+    note: {
+      label: "Votre demande",
+      placeholder: "Décrivez ce dont vous avez besoin : pièce, service, modèle de PC…",
+      required: true,
+      errorMessage: "Décrivez votre demande pour pouvoir l'envoyer.",
+    },
   },
 ];
+
+/**
+ * Règle du site : les deux premiers champs de chaque besoin sont obligatoires.
+ * Pour rendre l'un d'eux facultatif, ajoutez `required: false` à sa définition ci-dessus.
+ */
+function requireField(f: OrderField | null): OrderField | null {
+  return f ? { ...f, required: f.required ?? true } : null;
+}
+
+export const orderOptions: OrderOption[] = baseOptions.map((o) => ({
+  ...o,
+  primary: requireField(o.primary),
+  secondary: requireField(o.secondary),
+}));
 
 export const defaultOptionId = orderOptions[0].id;
 

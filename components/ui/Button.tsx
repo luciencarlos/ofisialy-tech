@@ -31,18 +31,21 @@ type Props = {
   children: ReactNode;
   href?: string;
   external?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  /** Aspect grisé et lecteurs d'écran informés, mais le clic reste reçu (pour afficher une explication). */
+  ariaDisabled?: boolean;
   className?: string;
 };
 
-export function Button({ variant, size = "md", children, href, external, onClick, className = "" }: Props) {
-  const cls = buttonClass(variant, className, size);
+export function Button({ variant, size = "md", children, href, external, onClick, ariaDisabled, className = "" }: Props) {
+  const cls = buttonClass(variant, `${ariaDisabled ? "opacity-60" : ""} ${className}`, size);
   if (href) {
     return (
       <a
         href={href}
         className={cls}
         onClick={onClick}
+        aria-disabled={ariaDisabled || undefined}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {children}
@@ -50,7 +53,7 @@ export function Button({ variant, size = "md", children, href, external, onClick
     );
   }
   return (
-    <button type="button" className={cls} onClick={onClick}>
+    <button type="button" className={cls} onClick={onClick} aria-disabled={ariaDisabled || undefined}>
       {children}
     </button>
   );
