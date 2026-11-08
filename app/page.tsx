@@ -14,6 +14,7 @@ export default function Home() {
   const showStock = stock.length > 0;
   return (
     <>
+      <div aria-hidden="true" className="circuit-bg" />
       <a
         href="#contenu"
         className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-[10px] focus:bg-sun focus:px-4 focus:py-3 focus:font-bold focus:text-sun-ink"

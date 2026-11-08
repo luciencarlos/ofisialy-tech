@@ -20,9 +20,9 @@ import { MessengerIcon, WhatsAppIcon } from "./ui/Icons";
 const field =
   "min-h-[46px] w-full rounded-[10px] border-[1.5px] border-line bg-bg px-3 py-2.5 text-base text-ink focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/30";
 
-/** Rouge des champs obligatoires : plus clair en mode sombre pour rester lisible. */
-const redText = "text-[#c62828] dark:text-[#ff7b7b]";
-const redBorder = "border-[#c62828] dark:border-[#ff7b7b]";
+/** Rouge des champs obligatoires, clair pour rester lisible sur le fond sombre. */
+const redText = "text-[#ff7b7b]";
+const redBorder = "border-[#ff7b7b]";
 
 const initial: OrderValues = {
   optionId: defaultOptionId,

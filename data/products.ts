@@ -1,4 +1,5 @@
 import type { Product } from "./types";
+import { modelAvailability } from "./availability";
 
 export const products: Product[] = [
   {
@@ -45,9 +46,9 @@ export const products: Product[] = [
       height: 275,
     },
     specs: [
-      // Disponibilité : "en-stock", "sur-commande" ou "epuise". Ajoutez availabilityNote: "…" pour un délai.
-      { label: "Rack 3.0", title: "USB 3.0", detail: "jusqu'à 5 Gbps", availability: "sur-commande" },
-      { label: "Rack 3.1", title: "USB Type-C", detail: "jusqu'à 10 Gbps", availability: "sur-commande" },
+      // La disponibilité se règle dans /admin > Réglages du site (fichier content/disponibilites.json).
+      { label: "Rack 3.0", title: "USB 3.0", detail: "jusqu'à 5 Gbps", ...modelAvailability("rack30") },
+      { label: "Rack 3.1", title: "USB Type-C", detail: "jusqu'à 10 Gbps", ...modelAvailability("rack31") },
     ],
     cta: { label: "Commander un rack", optionId: "rack-30", variant: "line" },
   },
@@ -58,9 +59,9 @@ export const products: Product[] = [
       "Pour remplacer un disque lent, agrandir le stockage ou réinstaller un système sur une base neuve.",
     layout: "row",
     specs: [
-      { label: "HDD", title: "Disque dur", detail: "2.5″, grande capacité", availability: "sur-commande" },
-      { label: "SSD", title: "SSD SATA", detail: "2.5″, démarrage rapide", availability: "sur-commande" },
-      { label: "NVMe", title: "SSD NVMe", detail: "M.2, pour les PC compatibles", availability: "sur-commande" },
+      { label: "HDD", title: "Disque dur", detail: "2.5″, grande capacité", ...modelAvailability("hdd") },
+      { label: "SSD", title: "SSD SATA", detail: "2.5″, démarrage rapide", ...modelAvailability("ssd") },
+      { label: "NVMe", title: "SSD NVMe", detail: "M.2, pour les PC compatibles", ...modelAvailability("nvme") },
     ],
     cta: { label: "Demander un disque", optionId: "disque-ssd", variant: "line" },
   },

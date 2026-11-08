@@ -13,7 +13,7 @@ const example = [
 
 export function Hero() {
   return (
-    <section aria-labelledby="titre-accueil" className="on-navy bg-navy bg-[radial-gradient(900px_420px_at_85%_10%,#123a8a_0%,transparent_60%)] text-on-navy">
+    <section aria-labelledby="titre-accueil" className="on-navy bg-[radial-gradient(900px_420px_at_85%_10%,rgba(18,58,138,.55)_0%,transparent_60%)] text-on-navy">
       <Container className="py-12 md:py-16">
         <div className="grid items-center gap-10 md:grid-cols-[1.25fr_.75fr]">
           <div>
@@ -38,7 +38,7 @@ export function Hero() {
             </ul>
           </div>
 
-          <aside aria-label="Exemple de demande" className="grid gap-3.5 rounded-2xl border border-white/20 bg-white/5 p-5">
+          <aside aria-label="Exemple de demande" className="grid gap-3.5 rounded-2xl border border-white/20 bg-navy/85 p-5 backdrop-blur-sm">
             <div className="flex items-center justify-between gap-3">
               <span className="font-mono text-xs uppercase tracking-[.08em] text-cyan">Exemple de demande</span>
               <BatteryCharge className="h-6 w-12 text-on-navy" />

@@ -1,29 +1,16 @@
 @import "tailwindcss";
 
-/* Couleurs du site : modifiez ici, le mode sombre est juste en dessous. */
+/* Couleurs du site : thème sombre « circuit imprimé », identique pour tous les visiteurs. */
 :root {
-  --bg: #f3f6fb;
-  --surface: #ffffff;
-  --ink: #0b1730;
-  --muted: #4b5b78;
-  --line: #d6dfee;
-  --brand: #1456c9;
-  --brand-ink: #ffffff;
-  --ok: #0f7b4a;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #060d1f;
-    --surface: #0d1a38;
-    --ink: #e8f0ff;
-    --muted: #9eb1d6;
-    --line: #1e315f;
-    --brand: #5a94ff;
-    --brand-ink: #06122c;
-    --ok: #4ad394;
-    color-scheme: dark;
-  }
+  --bg: #060d1f;
+  --surface: #0d1a38;
+  --ink: #e8f0ff;
+  --muted: #9eb1d6;
+  --line: #1e315f;
+  --brand: #5a94ff;
+  --brand-ink: #06122c;
+  --ok: #4ad394;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -105,6 +92,21 @@
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
+}
+
+/* Fond « circuit imprimé » : image SVG fixe derrière la page, dont les impulsions lumineuses
+   (animées dans le fichier lui-même) circulent le long des pistes. Image : public/images/circuit.svg */
+.circuit-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/images/circuit.svg") center / cover no-repeat;
+  opacity: 0.7;
+}
+/* Mouvement réduit : le même circuit, sans impulsions. */
+@media (prefers-reduced-motion: reduce) {
+  .circuit-bg { background-image: url("/images/circuit-static.svg"); }
 }
 
 .battery-fill {

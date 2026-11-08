@@ -1,0 +1,7 @@
+{
+  "rack30": { "statut": "sur-commande", "note": "" },
+  "rack31": { "statut": "sur-commande", "note": "" },
+  "hdd": { "statut": "sur-commande", "note": "" },
+  "ssd": { "statut": "sur-commande", "note": "" },
+  "nvme": { "statut": "sur-commande", "note": "" }
+}

@@ -71,6 +71,13 @@ Pour modifier ou retirer un article :
 
 Chaque publication lance une reconstruction du site. Si vous ajoutez plusieurs articles, enregistrez-les l'un après l'autre sans attendre.
 
+### Changer la disponibilité des racks et des disques
+
+1. Dans l'administration, ouvrez **Réglages du site > Disponibilité des racks et disques**.
+2. Pour chaque modèle (Rack 3.0, Rack 3.1, disque dur, SSD SATA, SSD NVMe), choisissez **En stock**, **Sur commande** ou **Épuisé**.
+3. Ajoutez si vous voulez une précision (« délai 3 jours », « 5 pièces restantes »).
+4. Cliquez sur **Publish > Publish now**. L'étiquette change sur le site après 1 à 2 minutes.
+
 ### Conseils pour de belles photos
 
 - Un seul article par photo, sur fond clair et uni, en pleine lumière.

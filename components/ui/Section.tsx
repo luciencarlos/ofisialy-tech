@@ -7,8 +7,8 @@ import { Container } from "./Container";
  */
 const tones = {
   base: "",
-  surface: "border-y border-line bg-surface",
-  navy: "on-navy bg-navy text-on-navy",
+  surface: "border-y border-line bg-surface/80",
+  navy: "on-navy bg-navy/85 text-on-navy",
 } as const;
 
 export function Section({
