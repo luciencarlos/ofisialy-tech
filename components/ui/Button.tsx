@@ -14,9 +14,9 @@ const sizes: Record<ButtonSize, string> = {
 
 const variants: Record<ButtonVariant, string> = {
   sun: "border-transparent bg-sun text-sun-ink hover:brightness-95",
-  ghost: "border-white/35 text-on-navy hover:bg-white/10",
+  ghost: "border-white/40 bg-navy/60 text-on-navy hover:bg-white/10",
   solid: "border-transparent bg-brand text-brand-ink hover:brightness-110",
-  line: "border-ink/30 text-ink hover:border-brand",
+  line: "border-ink/30 bg-bg/60 text-ink hover:border-brand",
   // Couleurs des marques : le texte est choisi pour rester lisible sur chaque fond.
   messenger: "border-transparent bg-[#0866ff] text-white hover:brightness-110",
   whatsapp: "border-transparent bg-[#25d366] text-[#04210f] hover:brightness-95",

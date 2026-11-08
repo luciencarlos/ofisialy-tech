@@ -5,9 +5,9 @@
   --bg: #060d1f;
   --surface: #0d1a38;
   --ink: #e8f0ff;
-  --muted: #9eb1d6;
+  --muted: #b8c7e6;
   --line: #1e315f;
-  --brand: #5a94ff;
+  --brand: #7eaaff;
   --brand-ink: #06122c;
   --ok: #4ad394;
   color-scheme: dark;
@@ -102,7 +102,11 @@
   z-index: -1;
   pointer-events: none;
   background: url("/images/circuit.svg") center / cover no-repeat;
-  opacity: 0.7;
+  opacity: 0.85;
+}
+/* Sur téléphone les pistes sont plus grosses derrière le texte : fond un peu plus discret. */
+@media (max-width: 640px) {
+  .circuit-bg { opacity: 0.6; }
 }
 /* Mouvement réduit : le même circuit, sans impulsions. */
 @media (prefers-reduced-motion: reduce) {

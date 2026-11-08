@@ -6,9 +6,9 @@ import { Container } from "./Container";
  * (clair, blanc encadré, marine) pour rythmer la lecture.
  */
 const tones = {
-  base: "",
-  surface: "border-y border-line bg-surface/80",
-  navy: "on-navy bg-navy/85 text-on-navy",
+  base: "bg-bg/66",
+  surface: "border-y border-line bg-surface/85",
+  navy: "on-navy bg-navy/92 text-on-navy",
 } as const;
 
 export function Section({

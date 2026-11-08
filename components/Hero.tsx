@@ -13,7 +13,7 @@ const example = [
 
 export function Hero() {
   return (
-    <section aria-labelledby="titre-accueil" className="on-navy bg-[radial-gradient(900px_420px_at_85%_10%,rgba(18,58,138,.55)_0%,transparent_60%)] text-on-navy">
+    <section aria-labelledby="titre-accueil" className="on-navy bg-[linear-gradient(90deg,rgba(6,13,31,.8)_0%,rgba(6,13,31,.68)_52%,rgba(6,13,31,.05)_100%)] text-on-navy">
       <Container className="py-12 md:py-16">
         <div className="grid items-center gap-10 md:grid-cols-[1.25fr_.75fr]">
           <div>
