@@ -18,11 +18,11 @@ import { Button } from "./ui/Button";
 import { MessengerIcon, WhatsAppIcon } from "./ui/Icons";
 
 const field =
-  "min-h-[46px] w-full rounded-[10px] border-[1.5px] border-line bg-bg px-3 py-2.5 text-base text-ink focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/30";
+  "min-h-[50px] w-full rounded-xl border-[1.5px] border-line bg-bg px-3.5 py-2.5 text-base text-ink placeholder:text-[#64748b] focus:border-cyan focus:outline-none focus:ring-[3px] focus:ring-cyan/25";
 
 /** Rouge des champs obligatoires, clair pour rester lisible sur le fond sombre. */
-const redText = "text-[#ff7b7b]";
-const redBorder = "border-[#ff7b7b]";
+const redText = "text-[#b91c1c]";
+const redBorder = "border-[#b91c1c]";
 
 const initial: OrderValues = {
   optionId: defaultOptionId,
@@ -52,6 +52,16 @@ function switchOption(v: OrderValues, optionId: string): OrderValues {
     measure: sameMeasure ? v.measure : "",
     note: samePrimary && sameSecondary ? v.note : "",
   };
+}
+
+/** Titre numéroté d'une étape du formulaire. */
+function StepHead({ n, children }: { n: number; children: React.ReactNode }) {
+  return (
+    <legend className="mb-3 flex items-center gap-2.5 text-base font-extrabold">
+      <span aria-hidden="true" className="grid size-7 place-items-center rounded-full bg-cobalt text-sm text-white">{n}</span>
+      {children}
+    </legend>
+  );
 }
 
 type DetailKey = "primary" | "secondary" | "measure";
@@ -205,8 +215,10 @@ export function OrderForm() {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="on-light grid gap-4 rounded-2xl bg-surface p-5 text-ink sm:p-6">
-      <div className="grid gap-3.5 sm:grid-cols-2">
+    <form onSubmit={(e) => e.preventDefault()} className="on-light grid gap-6 rounded-3xl border border-line bg-bg p-5 text-ink shadow-sm sm:p-6">
+      <fieldset className="min-w-0">
+        <StepHead n={1}>Votre besoin</StepHead>
+        <div className="grid gap-3.5">
         <div className="grid min-w-0 gap-1.5 sm:col-span-2">
           <label htmlFor="f-type" className="text-sm font-bold">Ce que vous cherchez</label>
           <select
@@ -228,6 +240,13 @@ export function OrderForm() {
           </select>
         </div>
 
+        </div>
+      </fieldset>
+
+      {fields.length > 0 ? (
+        <fieldset className="min-w-0">
+          <StepHead n={2}>Les détails</StepHead>
+          <div className="grid gap-3.5 sm:grid-cols-2">
         {fields.map((f) => (
           <DetailField
             key={f.key}
@@ -241,6 +260,13 @@ export function OrderForm() {
           />
         ))}
 
+          </div>
+        </fieldset>
+      ) : null}
+
+      <fieldset className="min-w-0">
+        <StepHead n={fields.length > 0 ? 3 : 2}>Vos coordonnées</StepHead>
+        <div className="grid gap-3.5 sm:grid-cols-2">
         <div className="grid min-w-0 gap-1.5">
           <label htmlFor="f-name" className="text-sm font-bold">Votre nom</label>
           <input id="f-name" className={field} value={values.name} onChange={set("name")} autoComplete="name" />
@@ -249,7 +275,13 @@ export function OrderForm() {
           <label htmlFor="f-city" className="text-sm font-bold">Ville</label>
           <input id="f-city" className={field} value={values.city} onChange={set("city")} autoComplete="address-level2" />
         </div>
-        <div className="grid min-w-0 gap-1.5 sm:col-span-2">
+        </div>
+      </fieldset>
+
+      <fieldset className="min-w-0">
+        <StepHead n={fields.length > 0 ? 4 : 3}>Précisions</StepHead>
+        <div className="grid gap-3.5">
+        <div className="grid min-w-0 gap-1.5 ">
           <label htmlFor="f-note" className="text-sm font-bold">
             {option.note.label}
             {option.note.required ? <> <RequiredMark /></> : null}
@@ -271,7 +303,8 @@ export function OrderForm() {
             </p>
           ) : null}
         </div>
-      </div>
+        </div>
+      </fieldset>
 
       {hasRequired ? (
         <p className="text-sm text-muted">
@@ -280,19 +313,19 @@ export function OrderForm() {
       ) : null}
 
       {option.notice ? (
-        <p role="note" className="rounded-[10px] border border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
+        <p role="note" className="rounded-xl border border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
           {option.notice}
         </p>
       ) : null}
 
       <div className="grid gap-2">
-        <label htmlFor="f-out" className="font-mono text-xs uppercase tracking-[.08em] text-muted">Aperçu de votre message</label>
+        <label htmlFor="f-out" className="text-xs font-bold uppercase tracking-[.06em] text-muted">Aperçu de votre message</label>
         <textarea
           id="f-out"
           ref={outRef}
           readOnly
           value={message}
-          className="min-h-[140px] w-full resize-y rounded-[10px] border-[1.5px] border-dashed border-line bg-bg p-3 font-mono text-sm leading-[1.55] text-ink"
+          className="min-h-[140px] w-full resize-y rounded-xl border-[1.5px] border-dashed border-line bg-bg p-3 font-mono text-sm leading-[1.55] text-ink"
         />
       </div>
 
@@ -321,7 +354,7 @@ export function OrderForm() {
         </p>
       ) : null}
       {process.env.NODE_ENV === "development" && !fb ? (
-        <p className="rounded-[10px] border border-dashed border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
+        <p className="rounded-xl border border-dashed border-line bg-bg px-3.5 py-2.5 text-sm text-muted">
           Mode développement : le bouton Messenger apparaît dès que <code className="font-mono">messenger</code> ou{" "}
           <code className="font-mono">facebook</code> est rempli dans <code className="font-mono">config/site.ts</code>.
         </p>

@@ -13,19 +13,17 @@ const availabilityLabel: Record<Availability, string> = {
 };
 
 const availabilityStyle: Record<Availability, string> = {
-  "en-stock": "border-ok text-ok",
+  "en-stock": "border-ok/60 bg-ok/10 text-ok",
   "sur-commande": "border-line text-muted",
   epuise: "border-transparent bg-line text-muted",
 };
-
-const priceFormat = new Intl.NumberFormat("fr-FR");
 
 function StockCard({ item }: { item: StockItem }) {
   const category = stockCategories.find((c) => c.id === item.category) ?? stockCategories[stockCategories.length - 1];
   const soldOut = item.availability === "epuise";
 
   return (
-    <article className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-surface">
+    <article className="group flex min-w-0 flex-col card-circuit overflow-hidden rounded-3xl border border-cyan/25">
       <div className="relative aspect-[4/3] overflow-hidden bg-white">
         {item.photo ? (
           <Image
@@ -37,13 +35,14 @@ function StockCard({ item }: { item: StockItem }) {
             className="h-full w-full object-contain transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="grid h-full place-items-center font-mono text-xs uppercase tracking-[.08em] text-[#4b5b78]">
+          <div className="grid h-full place-items-center text-xs font-bold uppercase tracking-[.06em] text-[#4b5b78]">
             {category.label}
           </div>
         )}
         <span
-          className={`absolute left-3 top-3 rounded-md border bg-surface px-2.5 py-1 font-mono text-xs font-bold ${availabilityStyle[item.availability]}`}
+          className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border bg-surface px-2.5 py-1 text-xs font-bold ${availabilityStyle[item.availability]}`}
         >
+          <span aria-hidden="true" className="size-2 rounded-full bg-current" />
           {availabilityLabel[item.availability]}
         </span>
       </div>
@@ -51,11 +50,6 @@ function StockCard({ item }: { item: StockItem }) {
         <h3 className="card-title">{item.title}</h3>
         {item.compatible ? <p className="font-mono text-sm text-muted">{item.compatible}</p> : null}
         {item.description ? <p className="text-muted">{item.description}</p> : null}
-        {item.price ? (
-          <p className="font-display text-2xl font-extrabold">
-            {priceFormat.format(item.price)} <span className="text-base font-bold text-muted">Ar</span>
-          </p>
-        ) : null}
         <div className="mt-auto w-full pt-1 sm:w-auto">
           <PickButton
             optionId={category.optionId}
@@ -85,8 +79,8 @@ export function StockGrid({ items }: { items: StockItem[] }) {
               type="button"
               aria-pressed={filter === c.id}
               onClick={() => setFilter(c.id)}
-              className={`min-h-11 cursor-pointer rounded-full border-2 px-4 text-base font-bold transition ${
-                filter === c.id ? "border-brand bg-brand text-brand-ink" : "border-line text-ink hover:border-brand"
+              className={`min-h-12 cursor-pointer rounded-full border-2 px-4 text-base font-bold transition ${
+                filter === c.id ? "border-cobalt bg-cobalt text-white" : "border-line text-ink hover:border-brand"
               }`}
             >
               {c.label}

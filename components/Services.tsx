@@ -13,7 +13,7 @@ export function Services() {
       <div className="grid gap-x-12 gap-y-8 md:grid-cols-2">
         {serviceGroups.map((g) => (
           <div key={g.label}>
-            <span className="mb-1.5 block font-mono text-xs uppercase tracking-[.08em] text-brand">{g.label}</span>
+            <span className="mb-1.5 block text-xs font-bold uppercase tracking-[.06em] text-brand">{g.label}</span>
             {g.items.map((s) => (
               <div key={s.title} className="reveal grid gap-1.5 border-t border-line py-4">
                 <h3 className="card-title">{s.title}</h3>

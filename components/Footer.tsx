@@ -6,15 +6,15 @@ import { SocialLinks } from "./SocialLinks";
 export function Footer({ showStock = false }: { showStock?: boolean }) {
   const links = [...navLinks.filter((l) => showStock || !l.stockOnly), navCta];
   return (
-    <footer className="on-navy bg-navy text-on-navy-muted">
-      <Container className="grid gap-7 py-10 text-sm">
+    <footer className="circuit on-navy border-t border-cyan/20 text-on-navy-muted [--scrim:linear-gradient(rgba(10,17,40,.75),rgba(10,17,40,.75))]">
+      <Container className="grid gap-7 pb-28 pt-10 text-sm md:pb-10">
         <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-7">
           <div className="grid max-w-[44ch] gap-1.5">
             <b className="font-display text-lg text-on-navy">{siteConfig.name}</b>
             <span className="text-base">{siteConfig.tagline}</span>
           </div>
           <nav aria-label="Pied de page" className="grid gap-1">
-            <span className="font-mono text-xs uppercase tracking-[.08em]">Navigation</span>
+            <span className="text-xs font-bold uppercase tracking-[.06em]">Navigation</span>
             <ul className="flex max-w-[22rem] flex-wrap gap-x-5">
               {links.map((l) => (
                 <li key={l.href}>

@@ -8,22 +8,25 @@ import { Services } from "@/components/Services";
 import { OrderSection } from "@/components/OrderSection";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { BottomNav } from "@/components/BottomNav";
+import { Poles } from "@/components/Poles";
+import { siteConfig } from "@/config/site";
 
 export default function Home() {
   const stock = getStock();
   const showStock = stock.length > 0;
   return (
     <>
-      <div aria-hidden="true" className="circuit-bg" />
       <a
         href="#contenu"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-[10px] focus:bg-sun focus:px-4 focus:py-3 focus:font-bold focus:text-sun-ink"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-[10px] focus:bg-cyan focus:px-4 focus:py-3 focus:font-bold focus:text-sun-ink"
       >
         Aller au contenu
       </a>
       <SiteHeader showStock={showStock} />
       <main id="contenu">
         <Hero />
+        <Poles />
         <StockSection items={stock} />
         <Catalogue />
         <ReferenceTips />
@@ -32,6 +35,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer showStock={showStock} />
+      <BottomNav tel={siteConfig.contact.phoneDisplay.replace(/[^\d+]/g, "")} />
     </>
   );
 }

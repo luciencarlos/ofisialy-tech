@@ -75,7 +75,7 @@ export function SocialLinks() {
 
   return (
     <div className="grid gap-3">
-      <span className="font-mono text-xs uppercase tracking-[.08em]">Suivez-nous</span>
+      <span className="text-xs font-bold uppercase tracking-[.06em]">Suivez-nous</span>
       <ul className="flex flex-wrap gap-3">
         {links.map((l) => (
           <li key={l.key} className="relative">

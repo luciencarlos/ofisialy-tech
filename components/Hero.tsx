@@ -13,18 +13,22 @@ const example = [
 
 export function Hero() {
   return (
-    <section aria-labelledby="titre-accueil" className="on-navy bg-[linear-gradient(90deg,rgba(6,13,31,.8)_0%,rgba(6,13,31,.68)_52%,rgba(6,13,31,.05)_100%)] text-on-navy">
+    <section id="accueil" aria-labelledby="titre-accueil" className="circuit on-navy text-on-navy [--scrim:linear-gradient(90deg,rgba(10,17,40,.92)_0%,rgba(10,17,40,.88)_62%,rgba(10,17,40,.3)_100%)]">
       <Container className="py-12 md:py-16">
         <div className="grid items-center gap-10 md:grid-cols-[1.25fr_.75fr]">
           <div>
-            <h1 id="titre-accueil" className="text-[clamp(34px,5.4vw,62px)] font-extrabold tracking-[-.02em]">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface-hi/80 px-3 py-1 text-xs font-bold uppercase tracking-[.06em] text-cyan">
+              <span aria-hidden="true" className="size-2 rounded-full bg-cyan shadow-[0_0_10px_rgba(0,210,255,.6)]" />
+              Accessoires et services informatiques
+            </span>
+            <h1 id="titre-accueil" className="text-[clamp(30px,5.2vw,56px)] font-extrabold tracking-[-.02em]">
               Batteries, claviers, disques et <em className="not-italic text-sun">dépannage</em> pour votre ordinateur.
             </h1>
-            <p className="mt-[18px] max-w-[56ch] text-lg text-on-navy-muted">
+            <p className="mt-[18px] max-w-[56ch] text-lg text-on-navy">
               Des pièces pour portables de toutes marques, commandées pour vous, et des services d&apos;installation
               faits rapidement : système, logiciels, pilotes et activation.
             </p>
-            <div className="mt-[26px] flex flex-wrap gap-3">
+            <div className="mt-[26px] flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button variant="sun" href="#commande">Demander une pièce</Button>
               <Button variant="ghost" href="#services">Voir les services</Button>
             </div>
@@ -38,9 +42,9 @@ export function Hero() {
             </ul>
           </div>
 
-          <aside aria-label="Exemple de demande" className="grid gap-3.5 rounded-2xl border border-white/20 bg-navy/85 p-5 backdrop-blur-sm">
+          <aside aria-label="Exemple de demande" className="grid gap-3.5 rounded-3xl border border-line bg-surface/90 p-5 backdrop-blur-md">
             <div className="flex items-center justify-between gap-3">
-              <span className="font-mono text-xs uppercase tracking-[.08em] text-cyan">Exemple de demande</span>
+              <span className="text-xs font-bold uppercase tracking-[.06em] text-cyan">Exemple de demande</span>
               <BatteryCharge className="h-6 w-12 text-on-navy" />
             </div>
             <dl className="grid gap-2.5">

@@ -12,7 +12,6 @@ export function OrderSection() {
   return (
     <Section id="commande" tone="navy">
         <SectionHead
-          tone="navy"
           eyebrow="Passer commande"
           title="Préparez votre demande en 30 secondes"
           text="Remplissez les champs, puis envoyez votre demande sur Messenger ou WhatsApp. Nous répondons avec la disponibilité et le prix."
@@ -21,12 +20,12 @@ export function OrderSection() {
           <ol className="grid gap-[22px]">
             {steps.map((s, i) => (
               <li key={s.title} className="grid grid-cols-[44px_1fr] gap-3.5">
-                <span className="grid size-11 place-items-center rounded-full bg-sun font-display text-xl font-extrabold text-sun-ink">
+                <span className="grid size-11 place-items-center rounded-full bg-cobalt font-display text-xl font-extrabold text-white">
                   {i + 1}
                 </span>
                 <div>
                   <b className="card-title block">{s.title}</b>
-                  <span className="text-on-navy-muted">{s.text}</span>
+                  <span className="text-muted">{s.text}</span>
                 </div>
               </li>
             ))}

@@ -4,19 +4,19 @@ export type ButtonVariant = "sun" | "ghost" | "solid" | "line" | "messenger" | "
 export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2.5 rounded-[10px] border-2 font-bold no-underline transition cursor-pointer";
+  "inline-flex items-center justify-center gap-2.5 rounded-2xl border-2 font-bold no-underline transition cursor-pointer";
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "min-h-11 px-4 text-base",
+  sm: "min-h-12 px-4 text-base",
   md: "min-h-12 px-5 text-base",
   lg: "min-h-14 px-4 text-lg",
 };
 
 const variants: Record<ButtonVariant, string> = {
-  sun: "border-transparent bg-sun text-sun-ink hover:brightness-95",
-  ghost: "border-white/40 bg-navy/60 text-on-navy hover:bg-white/10",
-  solid: "border-transparent bg-brand text-brand-ink hover:brightness-110",
-  line: "border-ink/30 bg-bg/60 text-ink hover:border-brand",
+  sun: "border-transparent bg-gradient-to-r from-[#4f8cff] to-cyan text-sun-ink hover:brightness-110 active:scale-[.98]",
+  ghost: "border-white/35 bg-navy/60 text-on-navy hover:bg-white/10",
+  solid: "border-transparent bg-cobalt text-white hover:bg-[#1d4ed8] active:scale-[.98]",
+  line: "border-line bg-transparent text-ink hover:bg-surface-hi hover:border-brand",
   // Couleurs des marques : le texte est choisi pour rester lisible sur chaque fond.
   messenger: "border-transparent bg-[#0866ff] text-white hover:brightness-110",
   whatsapp: "border-transparent bg-[#25d366] text-[#04210f] hover:brightness-95",

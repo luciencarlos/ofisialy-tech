@@ -13,7 +13,7 @@ const availabilityLabel: Record<SpecAvailability, string> = {
 };
 
 const availabilityStyle: Record<SpecAvailability, string> = {
-  "en-stock": "border-ok text-ok",
+  "en-stock": "border-ok/60 bg-ok/10 text-ok",
   "sur-commande": "border-line text-muted",
   epuise: "border-transparent bg-line text-muted",
 };
@@ -22,15 +22,16 @@ function SpecGrid({ specs, cols }: { specs: NonNullable<Product["specs"]>; cols:
   return (
     <div className={`grid gap-3 ${cols}`}>
       {specs.map((s) => (
-        <div key={s.label} className="grid min-w-0 content-start gap-0.5 rounded-[10px] border border-line px-3.5 py-3">
-          <span className="font-mono text-xs uppercase tracking-[.08em] text-brand">{s.label}</span>
+        <div key={s.label} className="grid min-w-0 content-start gap-0.5 rounded-xl border border-line bg-bg/70 px-3.5 py-3">
+          <span className="text-xs font-bold uppercase tracking-[.06em] text-brand">{s.label}</span>
           <b className="font-display text-xl">{s.title}</b>
           <span className="text-sm text-muted">{s.detail}</span>
           {s.availability ? (
             <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span
-                className={`rounded-md border px-2 py-0.5 font-mono text-xs font-bold ${availabilityStyle[s.availability]}`}
+                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${availabilityStyle[s.availability]}`}
               >
+                <span aria-hidden="true" className="size-2 rounded-full bg-current" />
                 {availabilityLabel[s.availability]}
               </span>
               {s.availabilityNote ? <span className="text-sm text-muted">{s.availabilityNote}</span> : null}
@@ -48,7 +49,7 @@ function Tags({ items, highlight }: { items: string[]; highlight?: boolean }) {
       {items.map((t) => (
         <li
           key={t}
-          className={`rounded-md border px-2.5 py-1 font-mono text-xs font-medium ${
+          className={`rounded-full border px-3 py-1 text-xs font-bold ${
             highlight ? "border-transparent bg-sun text-sun-ink" : "border-line"
           }`}
         >
@@ -61,7 +62,7 @@ function Tags({ items, highlight }: { items: string[]; highlight?: boolean }) {
 
 function ProductCard({ p }: { p: Product }) {
   const wrapper =
-    "reveal group grid min-w-0 overflow-hidden rounded-2xl border border-line bg-surface " +
+    "reveal group grid min-w-0 card-circuit overflow-hidden rounded-3xl border border-cyan/25 transition hover:border-cyan/60 hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,.45)] " +
     (p.layout === "feature" ? "md:col-span-2 md:grid-cols-[1.1fr_1fr]" : "") +
     (p.layout === "card" ? "grid-rows-[auto_1fr]" : "") +
     (p.layout === "row" ? "md:col-span-2" : "");
@@ -129,7 +130,7 @@ export function Catalogue() {
           ))}
         </div>
         <div aria-label="Marques compatibles" className="mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-2">
-          <span className="mr-1.5 font-mono text-xs uppercase tracking-[.08em] text-muted">Compatible avec</span>
+          <span className="mr-1.5 text-xs font-bold uppercase tracking-[.06em] text-muted">Compatible avec</span>
           {brands.map((b) => (
             <span key={b} className="rounded-full border border-line bg-surface px-3 py-1 font-display text-lg font-bold">
               {b}

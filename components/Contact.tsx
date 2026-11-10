@@ -17,7 +17,7 @@ export function Contact() {
           title="Parlons de votre ordinateur"
           text="Une question sur une pièce, un service ou un délai ? Écrivez-nous, nous répondons avant et après chaque service."
         />
-        <div className="grid gap-3.5 rounded-2xl border border-line bg-surface p-5 sm:p-6">
+        <div className="grid gap-3.5 card-circuit rounded-3xl border border-cyan/25 p-5 sm:p-6">
           <h3 className="card-title">{siteConfig.name}</h3>
           <p>
             Retrouvez-nous sur la page Facebook <b>{siteConfig.name}</b>.
@@ -25,7 +25,7 @@ export function Contact() {
           {phoneDisplay ? (
             <a
               href={tel ? `tel:${tel}` : undefined}
-              className="inline-flex min-h-11 items-center break-words font-mono text-xl font-bold text-brand no-underline hover:underline"
+              className="inline-flex min-h-12 items-center break-words text-xl font-extrabold text-brand no-underline hover:underline"
             >
               {phoneDisplay}
             </a>
