@@ -124,12 +124,11 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-/* Cartes : même fond circuit que l'en-tête et le pied de page (version fixe, sans impulsions, pour rester fluide
-   avec beaucoup de cartes à l'écran), texte clair par-dessus. */
+/* Cartes : même fond circuit animé que l'en-tête et le pied de page, texte clair par-dessus. */
 .card-circuit {
   --scrim: linear-gradient(rgba(10, 17, 40, 0.8), rgba(10, 17, 40, 0.8));
   background-color: #0a1128;
-  background-image: var(--scrim), url("/images/circuit-static.svg");
+  background-image: var(--scrim), url("/images/circuit.svg");
   background-size: cover;
   background-position: center;
   color: var(--ink);
@@ -137,10 +136,9 @@
 .card-circuit :focus-visible {
   outline-color: var(--color-cyan);
 }
-/* Mouvement réduit : le même circuit, sans impulsions. */
-@media (prefers-reduced-motion: reduce) {
-  .circuit { background-image: var(--scrim), url("/images/circuit-static.svg"); }
-}
+/* Les impulsions circulent toujours, même si le système demande « moins d'animations » (Windows :
+   Paramètres > Accessibilité > Effets visuels > Effets d'animation). Ce sont de petits points lumineux décoratifs.
+   Pour les couper chez les personnes qui le demandent, remettre ici la bascule vers circuit-static.svg. */
 
 .battery-fill {
   transform-origin: left center;
